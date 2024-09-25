@@ -1,0 +1,67 @@
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo_index.css">
+    <title>Museo Metropolitano</title>
+</head>
+<body>
+    <div class="form-container">
+        <div class="logo-container">
+            <img src="imagenesStyle/logo.jpg" alt="Logo del Museo" class="logo">
+        </div>
+        
+        <div class="form-group">
+            <h1>Metropolitan Museum Art Collection</h1>
+            <label for="departamento">Departamento</label>
+            <select id="departamentoLista"></select>
+            <div id="gallerydept"></div>
+        </div>
+        <div class="form-group">
+            <label for="localizacion">Localización</label>
+            <select id="localizacion" name="localizacion">
+                <option value="">Selecciona una localización</option>
+                <option value="Europe">Europa</option>
+                <option value="Africa">Africa</option>
+                <option value="Paris">Paris</option>
+                <option value="China">China</option>
+                <option value="New York">Nueva York</option>
+                <option value="Egypt">Egipto</option>
+                <option value="Italy">Italia</option>
+                <option value="Greece">Grecia</option>
+                <option value="Japan">Japón</option>
+                <option value="Mexico">México</option>
+                <option value="India">India</option>
+                <option value="Spain">España</option>
+                <option value="England">Inglaterra</option>
+                <option value="Germany">Alemania</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="palabra_clave">Palabra clave</label>
+            <input type="text" id="palabra_clave" name="palabra_clave" placeholder="Ingrese la palabra clave">
+        </div>
+       
+        <div class="form-group flex-container">
+            <button id="buscarButton" type="button">Buscar</button>
+            <button id="limpiarButton" type="button">Limpiar Busqueda</button>
+        </div>
+    </div>
+    <div id="loader" class="loader" style="display:none;"></div> <!-- Loader -->
+    <div id="gallery" class="gallery"></div>
+    <div class="pagination">
+        <button id="antButton" onclick="cambiarPagina(-1)" style="display:none;" disabled>Anterior</button>
+        <button id="sigButton" onclick="cambiarPagina(1)" style="display:none;">Siguiente</button>
+        <span id="pageInfo"></span>
+    </div>
+    <!-- Modal para ver más imágenes -->
+<div id="modal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close-button" id="closeModal">&times;</span>
+        <h2>Imágenes Adicionales</h2>
+        <div id="additionalImagesContainer"></div>
+    </div>
+</div>
+    <script src="script.js"></script>
+</body>
+</html>

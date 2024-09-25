@@ -1,0 +1,258 @@
+body {
+    font-family: 'Lora', serif; /* Aplicar la fuente Lora */
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    background-image: url(imagenesStyle/FONDO1.webp);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fffdfd; /* Ajustar el color del texto para mejor visibilidad */
+}
+
+/* Estilos para el logo */
+.logo-container {
+    position: absolute;
+    top: 20px;
+    align-items: center;
+    margin-left: 270px;
+}
+
+.logo {
+    width: 150px;
+    height: auto;
+}
+
+/* Contenedor del formulario */
+.form-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: #1d1b1bb7;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(39, 39, 39, 0.5);
+    margin-top: 200px;
+    color: #fffdfd;
+}
+
+.form-group h1 {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group.flex-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.input-item {
+    flex: 1;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ec2c2c;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#departamento-lista {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background-color: #fff;
+    border: 1px solid #e74848;
+    border-top: none;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+#departamento-lista li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#departamento-lista li:hover {
+    background-color: #f0f0f0;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.card {
+    background: #242323e0;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-content {
+    padding: 15px;
+    color: #fff;
+}
+
+.card h3 {
+    margin: 0 0 10px;
+    font-size: 18px;
+}
+
+.card p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+
+.card button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #db1456;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.card button:hover {
+    background-color: #b91248;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #db1456;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pagination button:hover {
+    background-color: #b91248;
+}
+
+.pagination button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.pagination #pageInfo {
+    margin-right: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #d4d4d4;
+}
+
+button#buscarButton {
+    display: block;
+    width: 25%;
+    padding: 10px;
+    background-color: #db1456;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button#buscarButton:hover {
+    background-color: #b91248;
+}
+button#limpiarButton{
+    display: block;
+    padding: 10px;
+    background-color: #db1456;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+button#limpiarButton:hover {
+    background-color: #b91248;
+}
+
+/* Estilo para el loader */
+/* Estilo para el loader */
+.loader {
+    display: none; /* Ocultar inicialmente */
+    margin: 0 auto; /* Centrar horizontalmente */
+    border: 8px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 8px solid #db1456; /* Color del borde superior */
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+/* Animación de rotación */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.modal {
+    display: none; /* Ocultar el modal por defecto */
+    position: fixed; /* Fijo en la pantalla */
+    z-index: 1000; /* Asegurarse de que esté en la parte superior */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Alto completo */
+    overflow: auto; /* Habilitar desplazamiento si es necesario */
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro con opacidad */
+}
+
+.modal-content {
+    background-color: #181717;
+    margin: 15% auto; /* Centrando el modal */
+    padding: 20px;
+    border: 1px solid #e21616;
+    width: 80%; /* Ancho del modal */
+    max-width: 600px; /* Máximo ancho */
+}
+
+.close-button {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close-button:hover,
+.close-button:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#additionalImagesContainer img {
+    width: 100%; /* Ajustar imágenes al ancho del contenedor */
+    margin-bottom: 10px; /* Espaciado entre imágenes */
+}
