@@ -126,7 +126,7 @@ input[type="text"], select {
     display: block;
     width: 100%;
     padding: 10px;
-    background-color: #db1456;
+    background-color: #eb0b0b;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -134,7 +134,7 @@ input[type="text"], select {
 }
 
 .card button:hover {
-    background-color: #b91248;
+    background-color: #550404;
 }
 
 .pagination {
@@ -146,7 +146,7 @@ input[type="text"], select {
 .pagination button {
     padding: 10px 20px;
     margin: 0 10px;
-    background-color: #db1456;
+    background-color: #eb0c0c;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -154,11 +154,11 @@ input[type="text"], select {
 }
 
 .pagination button:hover {
-    background-color: #b91248;
+    background-color: #550404;
 }
 
 .pagination button:disabled {
-    background-color: #d81818;
+    background-color: #5c5b5b;
     cursor: not-allowed;
 }
 
@@ -173,7 +173,7 @@ button#buscarButton {
     display: block;
     width: 25%;
     padding: 10px;
-    background-color: #db1456;
+    background-color: #ff0000;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -182,12 +182,12 @@ button#buscarButton {
 }
 
 button#buscarButton:hover {
-    background-color: #b91248;
+    background-color:  #550404;
 }
 button#limpiarButton{
     display: block;
     padding: 10px;
-    background-color: #db1456;
+    background-color: #ee0505;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -195,17 +195,17 @@ button#limpiarButton{
     transition: background-color 0.3s ease;
 }
 button#limpiarButton:hover {
-    background-color: #b91248;
+    background-color: #550404;
 }
 
-/* Estilo para el loader */
+
 /* Estilo para el loader */
 .loader {
-    display: none; /* Ocultar inicialmente */
-    margin: 0 auto; /* Centrar horizontalmente */
+    display: none; 
+    margin: 0 auto;
     border: 8px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
-    border-top: 8px solid #db1456; /* Color del borde superior */
+    border-top: 8px solid #d30a14; 
     width: 50px;
     height: 50px;
     animation: spin 1s linear infinite;
@@ -217,25 +217,27 @@ button#limpiarButton:hover {
     100% { transform: rotate(360deg); }
 }
 
+/* Estilos para el modal */
 .modal {
-    display: none; /* Ocultar el modal por defecto */
-    position: fixed; /* Fijo en la pantalla */
-    z-index: 1000; /* Asegurarse de que esté en la parte superior */
+    display: none;
+    position: fixed;
+    z-index: 1000;
     left: 0;
     top: 0;
-    width: 100%; /* Ancho completo */
-    height: 100%; /* Alto completo */
-    overflow: auto; /* Habilitar desplazamiento si es necesario */
-    background-color: rgba(0, 0, 0, 0.8); /* Fondo negro con opacidad */
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .modal-content {
     background-color: #181717;
-    margin: 15% auto; /* Centrando el modal */
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #e21616;
-    width: 80%; /* Ancho del modal */
-    max-width: 600px; /* Máximo ancho */
+    width: 80%;
+    max-width: 600px;
+    color: #ffffff;
 }
 
 .close-button {
@@ -243,16 +245,29 @@ button#limpiarButton:hover {
     float: right;
     font-size: 28px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .close-button:hover,
 .close-button:focus {
-    color: black;
+    color: #ffffff;
     text-decoration: none;
-    cursor: pointer;
+}
+
+/* Estilos para el contenido del modal */
+.modal-content h2 {
+    color: #ffffff;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+#additionalImagesContainer p {
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 #additionalImagesContainer img {
-    width: 100%; /* Ajustar imágenes al ancho del contenedor */
-    margin-bottom: 10px; /* Espaciado entre imágenes */
+    width: 100%;
+    margin-bottom: 10px;
+    border-radius: 4px;
 }

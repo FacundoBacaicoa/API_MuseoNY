@@ -190,11 +190,11 @@ const crearCard = async (objeto) => {
     const culture = await translateText(objeto.culture || 'No especificada', 'es');
     const dynasty = await translateText(objeto.dynasty || 'No especificada', 'es');
 
-    const imageUrl = objeto.primaryImageSmall || 'https://via.placeholder.com/150';
+    const imageUrl = objeto.primaryImageSmall || '/imagenesStyle/sinIMG .jpg';
     const creationDate = objeto.objectDate || 'Fecha no disponible';
 
     card.innerHTML = `
-        <img src="${imageUrl}" alt="${title}" title="Fecha de creación: ${creationDate}" onerror="this.onerror=null;this.src='https://via.placeholder.com/150';">
+        <img src="${imageUrl}" alt="${title}" title="Fecha de creación: ${creationDate}" onerror="this.onerror=null;this.src='/imagenesStyle/sinIMG .jpg';">
         <div class="card-content">
             <h3>${title}</h3>
             <p>Cultura: ${culture}</p>
@@ -211,6 +211,8 @@ const crearCard = async (objeto) => {
 
 // Función para ver más imágenes
 const verMasImagenes = async (objectID) => {
+    const modal = document.getElementById('modal');
+    const modalContent = document.querySelector('.modal-content');
     const additionalImagesContainer = document.getElementById('additionalImagesContainer');
     additionalImagesContainer.innerHTML = ''; // Limpiar contenido previo
 
@@ -219,28 +221,40 @@ const verMasImagenes = async (objectID) => {
         const respuesta = await fetch(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${objectID}`);
         const objeto = await respuesta.json();
 
+        // Traducir el título del objeto antes de asignarlo al modal
+        const translatedTitle = await translateText(objeto.title || 'Objeto sin título', 'es');
+
+        // Actualizar el título del modal con el nombre del objeto traducido
+        const modalTitle = modalContent.querySelector('h2');
+        modalTitle.textContent = `Imágenes adicionales de "${translatedTitle}"`;
+
+        // Agregar información de cultura y dinastía
+        const infoElement = document.createElement('p');
+        infoElement.innerHTML = `<strong>Cultura:</strong> ${objeto.culture || 'No especificada'}<br>
+                                 <strong>Dinastía:</strong> ${objeto.dynasty || 'No especificada'}`;
+        additionalImagesContainer.appendChild(infoElement);
+
         // Cargar imágenes adicionales
         if (objeto.additionalImages && objeto.additionalImages.length > 0) {
             objeto.additionalImages.forEach(imgUrl => {
                 const img = document.createElement('img');
                 img.src = imgUrl;
-                img.alt = 'Imagen adicional';
+                img.alt = `Imagen adicional de ${translatedTitle}`;
                 img.onerror = function () {
                     this.src = 'https://via.placeholder.com/150'; // Imagen por defecto si falla
                 };
                 additionalImagesContainer.appendChild(img);
             });
         } else {
-            additionalImagesContainer.innerHTML = '<p>No hay imágenes adicionales disponibles.</p>';
+            additionalImagesContainer.innerHTML += '<p>No hay imágenes adicionales disponibles.</p>';
         }
 
         // Mostrar el modal
-        document.getElementById('modal').style.display = 'block';
+        modal.style.display = 'block';
     } catch (error) {
         console.error('Error al cargar imágenes adicionales:', error);
     }
 };
-
 // Función para cerrar el modal
 document.getElementById('closeModal').onclick = function () {
     document.getElementById('modal').style.display = 'none';
