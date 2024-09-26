@@ -134,9 +134,10 @@ const mostrarObjetosGaleria = async () => {
         return;
     }
 
+    // Calcular los objetos que se mostrarán en la página actual
     const inicio = paginaActual * objetosPorPagina;
     const fin = inicio + objetosPorPagina;
-    const objetosPagina = objetosActuales.slice(inicio, fin);
+    const objetosPagina = objetosActuales.slice(inicio, Math.min(fin, objetosActuales.length)); // Asegurar que no exceda los límites
 
     for (const id of objetosPagina) {
         try {
@@ -154,7 +155,6 @@ const mostrarObjetosGaleria = async () => {
             console.error(`Error al cargar objeto ${id}:`, error);
         }
     }
-
     antButton.style.display = 'inline-block';
     sigButton.style.display = 'inline-block';
 };
