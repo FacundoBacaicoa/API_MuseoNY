@@ -93,6 +93,16 @@ const construirURLBusqueda = () => {
 
 // Cargar objetos filtrados
 const cargarObjetosFiltrados = async () => {
+    const departamentoSeleccionado = departamentoLista.value;
+    const localizacion = localizacionInput.value.trim();
+    const palabraClave = palabraClaveInput.value.trim();
+
+    // Validar si al menos uno de los campos está lleno
+    if (!departamentoSeleccionado && !localizacion && !palabraClave) {
+        mostrarAdvertencia('Necesita llenar algunos de los campos para realizar una búsqueda.');
+        return;
+    }
+
     console.log('Iniciando búsqueda de objetos...');
     antButton.style.display = 'none';
     sigButton.style.display = 'none';
@@ -132,6 +142,7 @@ const cargarObjetosFiltrados = async () => {
     }, 2000);
 };
 
+
 // Mostrar objetos en la galería
 const mostrarObjetosGaleria = async () => {
     console.log('Mostrando objetos en la galería...');
@@ -145,7 +156,7 @@ const mostrarObjetosGaleria = async () => {
     // Calcular los objetos que se mostrarán en la página actual
     const inicio = paginaActual * objetosPorPagina;
     const fin = inicio + objetosPorPagina;
-    const objetosPagina = objetosActuales.slice(inicio, Math.min(fin, objetosActuales.length)); // Asegurar que no exceda los límites
+    const objetosPagina = objetosActuales.slice(inicio, Math.min(fin, objetosActuales.length));
 
     for (const id of objetosPagina) {
         try {
@@ -166,7 +177,7 @@ const mostrarObjetosGaleria = async () => {
     antButton.style.display = 'inline-block';
     sigButton.style.display = 'inline-block';
 };
-// Función para traducir texto (opcional)
+// Función para traducir texto 
 async function translateText(text, targetLang = 'es') {
     try {
         const response = await fetch('/translate', {
@@ -292,12 +303,20 @@ const actualizarPaginacion = () => {
     console.log('Actualizando paginación...');
     const totalPaginas = Math.min(Math.ceil(objetosActuales.length / objetosPorPagina), 6); // Limitar a 6 páginas
     antButton.disabled = paginaActual === 0;
-    sigButton.disabled = (paginaActual + 1) >= totalPaginas; // Cambia esta línea para comparar con totalPaginas
+    sigButton.disabled = (paginaActual + 1) >= totalPaginas; 
     pageInfo.textContent = `Página ${paginaActual + 1} de ${totalPaginas}`;
 };
-
-// Event listeners
-buscarButton.addEventListener('click', cargarObjetosFiltrados); // Ejecutar búsqueda al hacer clic
+//boton buscar
+// Función para mostrar mensaje de advertencia si no hay campos llenos
+const mostrarAdvertencia = (mensaje) => {
+    const advertencia = document.createElement('p');
+    advertencia.textContent = mensaje;
+    advertencia.style.color = 'black';
+    gallery.innerHTML = ''; 
+    gallery.appendChild(advertencia); 
+};
+// event listener del botón de búsqueda
+buscarButton.addEventListener('click', cargarObjetosFiltrados);
 
 // Función para habilitar o inhabilitar el botón limpiar
 const actualizarEstadoBotonLimpiar = () => {
@@ -306,15 +325,15 @@ const actualizarEstadoBotonLimpiar = () => {
 
 // Función para limpiar los campos de búsqueda
 const limpiarCampos = () => {
-    departamentoLista.value = ''; // Restablecer el departamento
-    localizacionInput.value = ''; // Restablecer la localización
-    palabraClaveInput.value = ''; // Restablecer la palabra clave
-    gallery.innerHTML = ''; // Limpiar la galería
-    pageInfo.textContent = ''; // Limpiar información de página
-    antButton.style.display = 'none'; // Ocultar botón anterior
-    sigButton.style.display = 'none'; // Ocultar botón siguiente
+    departamentoLista.value = ''; 
+    localizacionInput.value = ''; 
+    palabraClaveInput.value = ''; 
+    gallery.innerHTML = ''; 
+    pageInfo.textContent = ''; 
+    antButton.style.display = 'none'; 
+    sigButton.style.display = 'none'; 
     objetosCargados = false; // Reiniciar el estado
-    actualizarEstadoBotonLimpiar(); // Inhabilitar el botón después de limpiar
+    actualizarEstadoBotonLimpiar(); 
 };
 
 // Agregar evento al botón Limpiar
