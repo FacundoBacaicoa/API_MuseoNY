@@ -9,12 +9,15 @@ const sigButton = document.getElementById('sigButton');
 const pageInfo = document.getElementById('pageInfo');
 const buscarButton = document.getElementById('buscarButton');
 const gallerydept = document.getElementById('gallerydept');
+const limpiarButton = document.getElementById('limpiarButton');
+
 
 // Variables globales
 let departamentos = [];
 let objetosActuales = [];
 let paginaActual = 0;
 const objetosPorPagina = 20;
+let objetosCargados = false;
 
 // Cargar departamentos
 const cargarDepartamentos = async () => {
@@ -93,12 +96,13 @@ const cargarObjetosFiltrados = async () => {
     console.log('Iniciando búsqueda de objetos...');
     antButton.style.display = 'none';
     sigButton.style.display = 'none';
+    objetosCargados = false; // Reiniciar el estado
+    actualizarEstadoBotonLimpiar(); // Inhabilitar el botón al iniciar la búsqueda
 
     // Mostrar el loader
     const loader = document.getElementById('loader');
-    loader.style.display = 'block'; // Mostrar el loader
+    loader.style.display = 'block';
 
-    // Esperar 2 segundos antes de iniciar la búsqueda
     setTimeout(async () => {
         try {
             const url = construirURLBusqueda();
@@ -108,20 +112,24 @@ const cargarObjetosFiltrados = async () => {
             if (respuesta.ok) {
                 const data = await respuesta.json();
                 console.log('Datos de búsqueda recibidos:', data);
-                objetosActuales = (data.objectIDs || []).slice(0, 120); // Limitar a 120 objetos
+                objetosActuales = (data.objectIDs || []).slice(0, 120);
                 paginaActual = 0;
                 actualizarPaginacion();
-                loader.style.display = 'none'; // Ocultar el loader
-                mostrarObjetosGaleria(); // Mostrar objetos
+                loader.style.display = 'none';
+                await mostrarObjetosGaleria(); // Esperar a que se muestren los objetos
+                objetosCargados = true; // Marcar que los objetos se han cargado
+                actualizarEstadoBotonLimpiar(); // Habilitar el botón después de cargar
             } else {
                 throw new Error(`HTTP error! status: ${respuesta.status}`);
             }
         } catch (error) {
             console.error('Error al cargar objetos filtrados:', error);
             gallery.innerHTML = '<p>Error al cargar los resultados. Por favor, intente nuevamente.</p>';
-            loader.style.display = 'none'; // Ocultar el loader en caso de error
+            loader.style.display = 'none';
+            objetosCargados = false; // Asegurar que el botón permanezca inhabilitado en caso de error
+            actualizarEstadoBotonLimpiar();
         }
-    }, 2000); // Esperar 2000 ms (2 segundos)
+    }, 2000);
 };
 
 // Mostrar objetos en la galería
@@ -290,8 +298,11 @@ const actualizarPaginacion = () => {
 
 // Event listeners
 buscarButton.addEventListener('click', cargarObjetosFiltrados); // Ejecutar búsqueda al hacer clic
-// Elemento del botón Limpiar
-const limpiarButton = document.getElementById('limpiarButton');
+
+// Función para habilitar o inhabilitar el botón limpiar
+const actualizarEstadoBotonLimpiar = () => {
+    limpiarButton.disabled = !objetosCargados;
+};
 
 // Función para limpiar los campos de búsqueda
 const limpiarCampos = () => {
@@ -302,6 +313,8 @@ const limpiarCampos = () => {
     pageInfo.textContent = ''; // Limpiar información de página
     antButton.style.display = 'none'; // Ocultar botón anterior
     sigButton.style.display = 'none'; // Ocultar botón siguiente
+    objetosCargados = false; // Reiniciar el estado
+    actualizarEstadoBotonLimpiar(); // Inhabilitar el botón después de limpiar
 };
 
 // Agregar evento al botón Limpiar
@@ -310,6 +323,7 @@ limpiarButton.addEventListener('click', limpiarCampos);
 // Inicialización
 console.log('Iniciando aplicación...');
 cargarDepartamentos();
+actualizarEstadoBotonLimpiar();
 
 
 

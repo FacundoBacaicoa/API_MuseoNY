@@ -184,7 +184,7 @@ button#buscarButton {
 button#buscarButton:hover {
     background-color:  #550404;
 }
-button#limpiarButton{
+button#limpiarButton {
     display: block;
     padding: 10px;
     background-color: #ee0505;
@@ -192,12 +192,25 @@ button#limpiarButton{
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, opacity 0.3s ease;
 }
+
 button#limpiarButton:hover {
     background-color: #550404;
 }
 
+/* Nuevo estilo para el estado inhabilitado */
+button#limpiarButton:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* Asegurarse de que el hover no afecte al botón cuando está inhabilitado */
+button#limpiarButton:disabled:hover {
+    background-color: #cccccc;
+}
 
 /* Estilo para el loader */
 .loader {
