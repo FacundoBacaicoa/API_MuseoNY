@@ -99,7 +99,7 @@ const cargarObjetosFiltrados = async () => {
 
     // Validar si al menos uno de los campos está lleno
     if (!departamentoSeleccionado && !localizacion && !palabraClave) {
-        mostrarAdvertencia('Necesita llenar algunos de los campos para realizar una búsqueda.');
+        mostrarAdvertencia('Necesita llenar alguno de los campos para realizar una búsqueda.');
         return;
     }
 
@@ -311,7 +311,7 @@ const actualizarPaginacion = () => {
 const mostrarAdvertencia = (mensaje) => {
     const advertencia = document.createElement('p');
     advertencia.textContent = mensaje;
-    advertencia.style.color = 'black';
+    advertencia.style.color = 'white';
     gallery.innerHTML = ''; 
     gallery.appendChild(advertencia); 
 };
